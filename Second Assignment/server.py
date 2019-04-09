@@ -26,6 +26,53 @@ def verify_password(stored_password, provided_password):
     return pwdhash == stored_password
 
 
+class Question(object):
+    """docstring for question."""
+    def __init__(self, question, choiceA, choiceB, choiceC, choiceD, correct_answer):
+        # super(Qquestion, self).__init__()
+        self.question = question
+        self.choiceA = choiceA
+        self.choiceB = choiceB
+        self.choiceC = choiceC
+        self.choiceD = choiceD
+        self.correct_answer = correct_answer
+
+def get_questions():
+    questins_file = open('Questions.txt', 'r')
+    answers_file  = open('Answers.txt', 'r')
+    q_lines = questins_file.readlines()
+    correct_answers = answers_file.readlines()
+    ret = []
+    cur_question = Question("Q", "A", "B", "C", "D", "?")
+    c = 0
+    cnt = 0
+    for q in q_lines:
+        if q[0]=='-':
+            correct_answer = correct_answers[cnt]
+            cnt+=1
+            cur_question.correct_answer = correct_answer
+            cur_question = json.dumps(cur_question.__dict__)
+            cur_question = json.loads(cur_question)
+            ret.append(cur_question)
+            c = 0
+            cur_question = Question("Q", "A", "B", "C", "D", "?")
+            continue
+        if c == 0:
+            cur_question.question = q
+        elif c == 1:
+            cur_question.choiceA = q
+        elif c == 2:
+            cur_question.choiceB = q
+        elif c == 3:
+            cur_question.choiceC = q
+        elif c == 4:
+            cur_question.choiceD = q
+        c+=1
+    return ret
+
+
+
+
 def register(username, password):
     users_file = open('users.txt', 'r+')
     users = users_file.readlines()
@@ -51,13 +98,11 @@ def login(username, password):
     return False
 
 
-
-
-
-
 server_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 server_socket.bind((HOST, PORT))
 server_socket.listen(5)
+questions = get_questions()
+
 while True:
     print("Waiting for connection ")
     client_socket, addr = server_socket.accept()
@@ -83,31 +128,21 @@ while True:
             client_socket.sendall(b'Invaild username and/or password')
     # loged in
     # questins and answers files
-    questins = open('Questions.txt', 'r')
-    answers  = open('Answers.txt', 'r')
     correct = 0
-    question_count = 0
-    # read the questions file
-    q_lines = questins.readlines()
-    correct_answers = answers.readlines()
-    number_of_questions = len(correct_answers)
-    client_socket.sendall(str(number_of_questions).decode("utf-8"))
-    for q_line in q_lines:
-        client_socket.sendall(q_line.decode("utf-8"))
-        if q_line[3:5]=='--':
-            # questins are seperated by a line of dashes -
-            correct_answer = correct_answers[question_count]
-            user_answer = client_socket.recv(BUFFSIZE)
-            user_answer +='\n'
-            question_count +=1
-            if correct_answer == user_answer:
-                correct +=1
-            if question_count == number_of_questions:
-                break
-            continue
+    cnt = 0
+    for i in range(5):
+        cur_question = questions[i]
+        correct_answer = cur_question["correct_answer"]
+        cur_question["correct_answer"] = "?"
+        cur_question = str(cur_question)
+        client_socket.sendall(cur_question)
+        user_answer = client_socket.recv(BUFFSIZE)
+        user_answer +='\n'
+        if correct_answer == user_answer:
+            correct +=1
 
     # end of questions
-    grade = correct * 100.0 / question_count
+    grade = correct * 100.0 / 5
     grade = str(grade)
     client_socket.sendall(grade.decode("utf-8"))
     client_socket.close()
