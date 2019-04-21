@@ -35,8 +35,11 @@ Now the Apache Server is running.
 We make the website, four pages with the names:
 ```
 index.html 
+
 p1.html
+
 p2.html
+
 p3.html
 ```
 Page `index.html` is the home page.
