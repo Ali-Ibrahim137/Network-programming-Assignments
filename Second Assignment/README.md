@@ -16,7 +16,8 @@ To check the service is running, just run the command:
 sudo systemctl status apache2
 ```
 the output should be something similar to:
-```● apache2.service - The Apache HTTP Server
+```
+● apache2.service - The Apache HTTP Server
    Loaded: loaded (/lib/systemd/system/apache2.service; enabled; vendor preset: enabled)
   Drop-In: /lib/systemd/system/apache2.service.d
            └─apache2-systemd.conf
@@ -108,4 +109,3 @@ We used the `HTML parser` included in Python’s standard library and passed it 
 ```
 links = soup.find_all('a')
 ```
-
