@@ -1,8 +1,9 @@
 import socket
 import json
 import hashlib, binascii, os
+import datetime
 HOST = '127.0.0.1'
-PORT = 1234
+PORT = 1160
 BUFFSIZE = 2048
 
 
@@ -97,16 +98,48 @@ def login(username, password):
             return verify_password(user['password'], password)
     return False
 
+def print_result(username, test, result):
+    date = str(datetime.datetime.now())
+    log_file = open('log.txt', 'a')
+    s = "|" + username
+    while True:
+        if len(s) == 27:
+            s+='|'
+            break;
+        s+=' '
+    s+=test
+    while True:
+        if len(s) == 41:
+            s+='|'
+            break;
+        s+=' '
+    s+=result
+    while True:
+        if len(s) == 50:
+            s+='|'
+            break;
+        s+=' '
+    s+=date
+    while True:
+        if len(s) >= 80:
+            s+='|'
+            break;
+        s+=' '
+    s+='\n'
+    log_file.write(s)
+    s = '|--------------------------|-------------|--------|-----------------------------|\n'
+    log_file.write(s)
+
 
 server_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 server_socket.bind((HOST, PORT))
 server_socket.listen(5)
-questions = get_questions()
 
 while True:
     print("Waiting for connection ")
     client_socket, addr = server_socket.accept()
     print("Connection recived from addres ", addr)
+    username = ""
     while True:
         request_type = client_socket.recv(BUFFSIZE)
         # client_socket.sendall(b'Input username: ')
@@ -130,19 +163,23 @@ while True:
     # questins and answers files
     correct = 0
     cnt = 0
+    questions = get_questions()
     for i in range(5):
         cur_question = questions[i]
+        temp = questions[i]
         correct_answer = cur_question["correct_answer"]
         cur_question["correct_answer"] = "?"
-        cur_question = str(cur_question)
-        client_socket.sendall(cur_question)
+        # cur_question = str(cur_question)
+        client_socket.sendall(str(cur_question))
         user_answer = client_socket.recv(BUFFSIZE)
         user_answer +='\n'
+        cur_question = temp
         if correct_answer == user_answer:
             correct +=1
 
     # end of questions
     grade = correct * 100.0 / 5
     grade = str(grade)
+    print_result(username, "Python test", grade)
     client_socket.sendall(grade.decode("utf-8"))
     client_socket.close()
