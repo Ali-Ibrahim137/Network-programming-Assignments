@@ -35,18 +35,32 @@ Now the Apache Server is running.
 We make the website, four pages with the names:
 ```
 index.html 
+```
+
+```
 p1.html
+```
+
+```
 p2.html
+```
+
+```
 p3.html
 ```
+
 Page `index.html` is the home page.
 Next we place the four pages in the directory:
 `/var/www/html/second/Q1/index.html`
 ## C
 To browse the website using the browser, we type these URLs in the browser:
+
 [Home page](http://localhost/second/Q1/)
+
 [page1](http://localhost/second/Q1/p1.html)
+
 [page2](http://localhost/second/Q1/p2.html)
+
 [page3](http://localhost/second/Q1/p3.html)
 
 ## D
@@ -109,4 +123,3 @@ We used the `HTML parser` included in Python’s standard library and passed it 
 ```
 links = soup.find_all('a')
 ```
-
