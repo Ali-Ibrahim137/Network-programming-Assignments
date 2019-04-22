@@ -29,7 +29,8 @@ def verify_password(stored_password, provided_password):
 
 class Question(object):
     """docstring for question."""
-    def __init__(self, question, choiceA, choiceB, choiceC, choiceD, correct_answer):
+    def __init__(self, question, choiceA,
+        choiceB, choiceC, choiceD, correct_answer):
         # super(Qquestion, self).__init__()
         self.question = question
         self.choiceA = choiceA
@@ -42,7 +43,6 @@ def get_questions(test):
 
     questins_file = open(test + '_Questions.txt', 'r')
     answers_file  = open(test + '_Answers.txt', 'r')
-    print(test)
     q_lines = questins_file.readlines()
     correct_answers = answers_file.readlines()
     ret = []
@@ -51,12 +51,6 @@ def get_questions(test):
     cnt = 0
     for q in q_lines:
         if q[0]=='-':
-            print(cur_question.question)
-            print(cur_question.choiceA)
-            print(cur_question.choiceB)
-            print(cur_question.choiceC)
-            print(cur_question.choiceD)
-            print('\n')
             correct_answer = correct_answers[cnt]
             cnt+=1
             cur_question.correct_answer = correct_answer

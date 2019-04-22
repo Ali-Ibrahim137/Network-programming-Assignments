@@ -31,6 +31,8 @@ the output should be something similar to:
            └─1019 /usr/sbin/apache2 -k start
 ```
 Now the Apache Server is running.
+
+
 ## B
 We make the website, four pages with the names:
 ```
@@ -101,7 +103,8 @@ Content-Type: text/html
 And we do the same for `page1`
 To retrieve the page using `urllib` we use:
 ```
-page = urllib.urlopen('http://localhost/second/Q1/p1.html').read()
+url = 'http://localhost/second/Q1/p1.html'
+page = urllib.urlopen(url).read()
 ```
 When we print the `page` we get:
 ```
@@ -117,9 +120,42 @@ When we print the `page` we get:
   </body>
 </html>
 ```
+
 ## E
 To extract the links in the homepage, we need to import `BeautifulSoup` from `bs4`
 We used the `HTML parser` included in Python’s standard library and passed it with the `page` variable to the `BeautifulSoup` constructor. then used the parser to extract the links using:
+
 ```
 links = soup.find_all('a')
 ```
+
+
+# Q2
+We first initialize the socket to establish the connection, when some client connects to the server he has the option to login or register, when the user registers new account first we check if there is a user with this username before, then the username and password are added to the `users.txt` file, the password is not stored as a plain text, we only store the `hash`value of the password, and compare the two `hash` values when the user attempts to login.
+Next, the user chooses the test to make, there are two tests math and python test, each with five questions, and each question with four possible answers.
+We used  `Question` class with 6 variables:
+
+    class Question(object):
+    """docstring for question."""
+    def __init__(self, question, choiceA,
+        choiceB, choiceC, choiceD, correct_answer):
+        # super(Qquestion, self).__init__()
+        self.question = question
+        self.choiceA = choiceA
+        self.choiceB = choiceB
+        self.choiceC = choiceC
+        self.choiceD = choiceD
+        self.correct_answer = correct_answer
+Next we are serializing the  `Question`  object to `json` format using `__dict__`   attribute.
+Before sending the `json` file using socket, it is transformed to dictionary and then to `str`  object. The client receives the `str` object and transforms it again to dictionary using the `eval` method.
+Finally, the grade is calculated and added to the `log.txt` file, the `log.txt` file is formatted to look like a grid.
+
+
+
+
+
+
+
+
+
+
