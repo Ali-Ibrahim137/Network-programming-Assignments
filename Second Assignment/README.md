@@ -54,9 +54,13 @@ Next we place the four pages in the directory:
 `/var/www/html/second/Q1/index.html`
 ## C
 To browse the website using the browser, we type these URLs in the browser:
+
 [Home page](http://localhost/second/Q1/)
+
 [page1](http://localhost/second/Q1/p1.html)
+
 [page2](http://localhost/second/Q1/p2.html)
+
 [page3](http://localhost/second/Q1/p3.html)
 
 ## D
