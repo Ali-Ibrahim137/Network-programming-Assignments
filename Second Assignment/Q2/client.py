@@ -18,6 +18,11 @@ while True:
     print(response)
     if response == 'Succesfully Registred!' or response == 'Succesfully Logedin!':
         break
+print('Chose the test you want to make, avilable tests are: math and python')
+print('1 for math')
+print('2 for python')
+test = raw_input()
+client_socket.sendall(test)
 for i in range(5):
     data = client_socket.recv(BUFFSIZE)
     data = eval(data)

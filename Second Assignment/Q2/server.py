@@ -38,9 +38,11 @@ class Question(object):
         self.choiceD = choiceD
         self.correct_answer = correct_answer
 
-def get_questions():
-    questins_file = open('Questions.txt', 'r')
-    answers_file  = open('Answers.txt', 'r')
+def get_questions(test):
+
+    questins_file = open(test + '_Questions.txt', 'r')
+    answers_file  = open(test + '_Answers.txt', 'r')
+    print(test)
     q_lines = questins_file.readlines()
     correct_answers = answers_file.readlines()
     ret = []
@@ -49,6 +51,12 @@ def get_questions():
     cnt = 0
     for q in q_lines:
         if q[0]=='-':
+            print(cur_question.question)
+            print(cur_question.choiceA)
+            print(cur_question.choiceB)
+            print(cur_question.choiceC)
+            print(cur_question.choiceD)
+            print('\n')
             correct_answer = correct_answers[cnt]
             cnt+=1
             cur_question.correct_answer = correct_answer
@@ -153,22 +161,32 @@ while True:
                 break
             else:
                 client_socket.sendall(b'Username alreday exists')
-        else:
+        elif request_type=="login":
             if login(username, password) == True:
                 print('User ', username, ' has Logedin')
                 client_socket.sendall(b'Succesfully Logedin!')
                 break
             client_socket.sendall(b'Invaild username and/or password')
+        else:
+            client_socket.sendall(b'Please chose a valid command.')
+    test = client_socket.recv(BUFFSIZE)
+    print('test is ' + test)
+    print(type(test))
+    if test=="1":
+        test = 'math'
+    else:
+        test = 'python'
     # loged in
     # questins and answers files
     correct = 0
     cnt = 0
-    questions = get_questions()
+    questions = get_questions(test)
     for i in range(5):
         cur_question = questions[i]
         temp = questions[i]
         correct_answer = cur_question["correct_answer"]
         cur_question["correct_answer"] = "?"
+        print(temp["question"])
         # cur_question = str(cur_question)
         client_socket.sendall(str(cur_question))
         user_answer = client_socket.recv(BUFFSIZE)
@@ -180,6 +198,6 @@ while True:
     # end of questions
     grade = correct * 100.0 / 5
     grade = str(grade)
-    print_result(username, "Python test", grade)
+    print_result(username, test, grade)
     client_socket.sendall(grade.decode("utf-8"))
     client_socket.close()
