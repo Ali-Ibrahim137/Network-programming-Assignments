@@ -3,7 +3,7 @@ import json
 import hashlib, binascii, os
 import datetime
 HOST = '127.0.0.1'
-PORT = 1160
+PORT = 5050
 BUFFSIZE = 2048
 
 
@@ -100,7 +100,7 @@ def login(username, password):
             return verify_password(user['password'], password)
     return False
 
-def print_result(username, test, result):
+def add_to_log(username, test, result):
     date = str(datetime.datetime.now())
     log_file = open('log.txt', 'a')
     s = "|" + username
@@ -164,8 +164,6 @@ while True:
         else:
             client_socket.sendall(b'Please chose a valid command.')
     test = client_socket.recv(BUFFSIZE)
-    print('test is ' + test)
-    print(type(test))
     if test=="1":
         test = 'math'
     else:
@@ -180,8 +178,6 @@ while True:
         temp = questions[i]
         correct_answer = cur_question["correct_answer"]
         cur_question["correct_answer"] = "?"
-        print(temp["question"])
-        # cur_question = str(cur_question)
         client_socket.sendall(str(cur_question))
         user_answer = client_socket.recv(BUFFSIZE)
         user_answer +='\n'
@@ -192,6 +188,6 @@ while True:
     # end of questions
     grade = correct * 100.0 / 5
     grade = str(grade)
-    print_result(username, test, grade)
+    add_to_log(username, test, grade)
     client_socket.sendall(grade.decode("utf-8"))
     client_socket.close()

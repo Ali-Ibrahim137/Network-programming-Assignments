@@ -7,7 +7,7 @@ client_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)   # define cli
 server_address = ('localhost', 80)                                  # server address
 client_socket.connect(server_address)                               # connect to the server
 
-request_header = 'GET /second/ HTTP/1.0\r\n\r\n'                    # define request header for the home page
+request_header = 'GET /second/Q1/ HTTP/1.0\r\n\r\n'                    # define request header for the home page
 client_socket.send(request_header)                                  # send the request
 # recive the response
 response = ''
@@ -27,7 +27,7 @@ client_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)   # define cli
 client_socket.connect(server_address)                               # connect to the server
 
 
-request_header = 'GET /second/p1.html HTTP/1.0\r\n\r\n'             # define request header for page p1
+request_header = 'GET /second/Q1/p1.html HTTP/1.0\r\n\r\n'             # define request header for page p1
 client_socket.send(request_header)                                  # send the request
 # recive the response
 response = ''
@@ -42,22 +42,22 @@ print(response)
 client_socket.close()                                               # close the socket
 
 for i in range(3):
-    print('\n')
+    print('')
 
 # retrive the page using urllib:
-url  = 'http://localhost/second/p1.html'
+url  = 'http://localhost/second/Q1/p1.html'
 page = urllib.urlopen(url).read()
 print('page p1:')
 print(page)
 
-url  = 'http://localhost/second/index.html'
+url  = 'http://localhost/second/Q1/index.html'
 page = urllib.urlopen(url).read()
 print('the home page:')
 print(page)
 
 
 for i in range(3):
-    print('\n')
+    print('')
 
 # list of linkes:
 soup = BeautifulSoup(page, 'html.parser')

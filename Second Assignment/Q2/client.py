@@ -1,7 +1,7 @@
 import socket
 import json
 HOST = '127.0.0.1'
-PORT = 1160
+PORT = 5050
 BUFFSIZE = 2048
 
 client_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
