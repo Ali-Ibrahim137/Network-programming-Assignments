@@ -36,7 +36,7 @@ Now the Apache Server is running.
 ## B
 We make the website, four pages with the names:
 ```
-index.html 
+index.html
 ```
 
 ```
@@ -69,7 +69,7 @@ To browse the website using the browser, we type these URLs in the browser:
 The solution for this part is in the `code.py` file.
 First we import the libraries `socket` and `urllib` the server address is `localhost` port `80` the client connects to the server and sends `GET` request, to retrieve the home page, the request header will be:
 ```
-GET /second/Q1 HTTP/1.0
+GET /second/Q1/ HTTP/1.0
 ```
 then the client receives the response, the response will be:
 ```
@@ -149,13 +149,3 @@ We used  `Question` class with 6 variables:
 Next we are serializing the  `Question`  object to `json` format using `__dict__`   attribute.
 Before sending the `json` file using socket, it is transformed to dictionary and then to `str`  object. The client receives the `str` object and transforms it again to dictionary using the `eval` method.
 Finally, the grade is calculated and added to the `log.txt` file, the `log.txt` file is formatted to look like a grid.
-
-
-
-
-
-
-
-
-
-
