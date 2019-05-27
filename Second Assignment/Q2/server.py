@@ -40,7 +40,6 @@ class Question(object):
         self.correct_answer = correct_answer
 
 def get_questions(test):
-
     questins_file = open(test + '_Questions.txt', 'r')
     answers_file  = open(test + '_Answers.txt', 'r')
     q_lines = questins_file.readlines()
@@ -150,7 +149,7 @@ while True:
         password = client_socket.recv(BUFFSIZE)
         if request_type == "register":
             if register(username, password) == True:
-                print('Account created for user ', username)
+                print('Account created for user ' +  username)
                 client_socket.sendall(b'Succesfully Registred!')
                 break
             else:
@@ -163,6 +162,7 @@ while True:
             client_socket.sendall(b'Invaild username and/or password')
         else:
             client_socket.sendall(b'Please chose a valid command.')
+
     test = client_socket.recv(BUFFSIZE)
     if test=="1":
         test = 'math'

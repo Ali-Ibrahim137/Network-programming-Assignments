@@ -7,7 +7,7 @@ client_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)   # define cli
 server_address = ('localhost', 80)                                  # server address
 client_socket.connect(server_address)                               # connect to the server
 
-request_header = 'GET /second/Q1/ HTTP/1.0\r\n\r\n'                    # define request header for the home page
+request_header = 'GET /second/Q1/ HTTP/1.0\r\n\r\n'                 # define request header for the home page
 client_socket.send(request_header)                                  # send the request
 # recive the response
 response = ''
@@ -22,12 +22,11 @@ print('response from the home page:')
 print(response)
 
 client_socket.close()                                               # close the socket
-
 client_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)   # define client socket
 client_socket.connect(server_address)                               # connect to the server
 
 
-request_header = 'GET /second/Q1/p1.html HTTP/1.0\r\n\r\n'             # define request header for page p1
+request_header = 'GET /second/Q1/p1.html HTTP/1.0\r\n\r\n'          # define request header for page p1
 client_socket.send(request_header)                                  # send the request
 # recive the response
 response = ''

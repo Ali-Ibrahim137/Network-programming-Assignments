@@ -1,0 +1,30 @@
+Q1: The sum of the first N odd numbers is:
+A) (N*(N+1))/2
+B) N^2 + N
+C) N^2 + 2*N
+D) N^2
+--------------------------------------------------------------------------------
+Q2: Which method is a randomized method to find prime numbers?
+A) Sieve of Eratosthenes
+B) Rabin Miller Test
+C) Extended Education
+D) Chinese Remainder Theorem
+--------------------------------------------------------------------------------
+Q3: In a set of size N, What is the total number of permutations?
+A) N^2
+B) 2^N
+C) N!
+D) N! * 2^N
+--------------------------------------------------------------------------------
+Q4: Manhattan distance between two points A(x1, y1) and B(x2, y2) is:
+A) ((x1-x2)^2 + (y1-y2)^2)^0.5
+B) (x1-x2)^2 + (y1-y2)^2
+C) |x1-x2| + |y1-y2|
+D) x1-x2 + y1-y2
+--------------------------------------------------------------------------------
+Q5: PI is equal to:
+A) arccos(-1)
+B) arcsin(0.5)
+C) arctan(0)
+D) arctcos(0)
+--------------------------------------------------------------------------------

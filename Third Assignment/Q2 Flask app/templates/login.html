@@ -1,0 +1,48 @@
+<html<!doctype html>
+
+<html lang="en">
+<head>
+  <style>
+    body {background-color: firebrick;}
+    input[type=text] {
+     width: 30%;
+     padding: 12px 20px;
+     margin: 8px 0;
+     box-sizing: border-box;
+     border: 2px solid maroon;
+     border-radius: 4px;}
+     input[type=button ], input[type=submit], input[type=reset] {
+       background-color: white;
+       border: 2px solid maroon;
+       font-size: 10px;
+       border-radius: 8px;
+       text-align: center;
+       color: maroon;
+       padding: 14px 30px;
+       text-decoration: none;
+       margin: 4px 2px;
+       cursor: pointer;}
+       p {font-family: "Times New Roman", Times, serif; text-align: center; font:white; }
+       h1 {text-align: left;;}
+       h2 {text-align: left;}
+       h3 {text-align: left;}
+  </style>
+  <meta charset="utf-8">
+
+  <title>Login</title>
+  <meta name="description" content="The HTML5 Herald">
+  <meta name="author" content="SitePoint">
+
+</head>
+
+<body>
+  <div class="log-form" >
+  <h2 style="color:white;">Enter your university ID number</h2>
+  <form action="handlelogin" method="post">
+    <input class="center-block" type="text" id="ID" name="ID" style="text-align:center;" />
+    <input type="submit" value="GO!" />
+    <!--button type="submit" class="btn" type="warning">SEND!</button-->
+  </form>
+</div><!--end log form -->
+</body>
+</html>

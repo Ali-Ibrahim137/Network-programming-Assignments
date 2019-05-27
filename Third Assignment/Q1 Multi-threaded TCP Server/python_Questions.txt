@@ -1,0 +1,30 @@
+Q1: To install new python package called requests, you use:
+A) sudo apt upgrade requests
+B) sudo apt update requests
+C) wget requests
+D) pip install requests
+--------------------------------------------------------------------------------
+Q2: One of this is not related to python:
+A) Django
+B) Flask
+C) Laravell
+D) Shell
+--------------------------------------------------------------------------------
+Q3: To print a variable called x using python 3, you use:
+A) print x
+B) print[x]
+C) print (x)
+D) print {% x %}
+--------------------------------------------------------------------------------
+Q4: One of this problems is NP-hard problem:
+A) 3-SAT
+B) Knapsack
+C) MAX Flow
+D) Minimum Vertex Cover in Bipartite Graphs
+--------------------------------------------------------------------------------
+Q5: Which of this is not a programming language?
+A) Go
+B) Shakespeare
+C) kotlin
+D) Welcome
+--------------------------------------------------------------------------------
